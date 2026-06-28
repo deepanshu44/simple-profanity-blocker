@@ -36,10 +36,28 @@
   display: none !important;
 }
 
+/* ── Emoji Mode ────────────────────────────────────────────────── */
+.cb-emoji-wrapper {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  margin: 0 4px !important;
+  vertical-align: middle !important;
+}
+
+.cb-emoji {
+  display: block !important;
+  height: 1.15em !important;
+  width: 1.15em !important;
+  object-fit: contain !important;
+  pointer-events: none !important;
+}
+
 /* ── Inherit parent typography ─────────────────────────────────── */
 .cb-blur,
 .cb-replaced,
-.cb-removed {
+.cb-removed,
+.cb-emoji-wrapper {
   font-size: inherit !important;
   font-family: inherit !important;
   font-weight: inherit !important;

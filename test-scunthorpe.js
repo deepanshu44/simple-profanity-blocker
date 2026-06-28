@@ -132,6 +132,25 @@ async function testRemoveMode() {
   assert('Profanity removed from text', !bodyText.includes('fuck'), 'body: ' + bodyText);
 }
 
+async function testEmojiMode() {
+  console.log('\n── Emoji Mode ──');
+  const { CB, document } = createEnv('<p>What the fuck.</p>');
+
+  const matcher = await CB.Matcher.compileMatcher(1, [], []);
+  const engine = CB.FilterEngine.createFilterEngine(matcher, 'emoji', '*');
+  const result = CB.DOMWalker.walkAndFilter(document.body, engine);
+
+  assert('Emoji mode finds matches', result.matchCount >= 1);
+  const wrapper = document.querySelectorAll('.cb-emoji-wrapper');
+  assert('Emoji wrapper inserted', wrapper.length >= 1);
+  if (wrapper.length > 0) {
+    const imgs = wrapper[0].querySelectorAll('.cb-emoji');
+    // "fuck" is 4 letters, Math.max(1, floor(4/4)) = 1 emoji
+    assert('Correct number of emojis inserted (1 for 4 letters)', imgs.length === 1);
+    assert('Image src is correct', imgs[0].src.includes('icons/censor-emoji.svg'), 'got ' + imgs[0].src);
+  }
+}
+
 async function testEvasion() {
   console.log('\n── Evasion Detection ──');
 
@@ -229,6 +248,7 @@ async function main() {
   await testActualProfanity();
   await testReplaceMode();
   await testRemoveMode();
+  await testEmojiMode();
   await testEvasion();
   await testCustomWords();
   await testRemovedWords();

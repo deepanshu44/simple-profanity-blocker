@@ -17,6 +17,7 @@
     BLUR: 'blur',
     REPLACE: 'replace',
     REMOVE: 'remove',
+    EMOJI: 'emoji',
   });
 
   /** Profanity severity tiers (1 = most severe) */

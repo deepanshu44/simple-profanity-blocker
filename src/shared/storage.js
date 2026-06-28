@@ -57,7 +57,7 @@
       ? settings.tier
       : Constants.DEFAULT_SETTINGS.tier;
 
-    var modes = [Constants.FILTER_MODES.BLUR, Constants.FILTER_MODES.REPLACE, Constants.FILTER_MODES.REMOVE];
+    var modes = [Constants.FILTER_MODES.BLUR, Constants.FILTER_MODES.REPLACE, Constants.FILTER_MODES.REMOVE, Constants.FILTER_MODES.EMOJI];
     valid.mode = modes.indexOf(settings.mode) !== -1
       ? settings.mode
       : Constants.DEFAULT_SETTINGS.mode;

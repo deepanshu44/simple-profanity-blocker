@@ -91,6 +91,32 @@
   }
 
   /**
+   * Apply an 'emoji' instruction — swap matched segment with SVG images.
+   * @param {Text} textNode
+   * @param {Object} instr - { startIndex, endIndex, emojiCount }
+   */
+  function applyEmoji(textNode, instr) {
+    var afterNode = textNode.splitText(instr.startIndex);
+    afterNode.splitText(instr.endIndex - instr.startIndex);
+
+    var wrapper = document.createElement('span');
+    wrapper.className = 'cb-emoji-wrapper';
+    wrapper.setAttribute('title', '[filtered]');
+    wrapper.setAttribute('aria-hidden', 'true');
+    
+    var iconUrl = browser.runtime.getURL('icons/censor-emoji.svg');
+    for (var i = 0; i < instr.emojiCount; i++) {
+      var img = document.createElement('img');
+      img.src = iconUrl;
+      img.className = 'cb-emoji';
+      img.alt = '[filtered]';
+      wrapper.appendChild(img);
+    }
+    
+    afterNode.parentNode.replaceChild(wrapper, afterNode);
+  }
+
+  /**
    * Apply an array of filter instructions to a text node.
    * CRITICAL: Instructions are processed in reverse order (right-to-left)
    * so that character indices remain valid after each split.
@@ -120,6 +146,9 @@
           break;
         case 'remove':
           applyRemove(textNode, instr);
+          break;
+        case 'emoji':
+          applyEmoji(textNode, instr);
           break;
         default:
           log.warn('Unknown instruction action: ' + instr.action);

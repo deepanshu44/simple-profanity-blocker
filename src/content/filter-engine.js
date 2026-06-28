@@ -150,6 +150,14 @@
               endIndex: endIdx,
             });
             break;
+          case 'emoji':
+            instructions.push({
+              action: 'emoji',
+              startIndex: startIdx,
+              endIndex: endIdx,
+              emojiCount: Math.max(1, Math.floor(match.length / 4)),
+            });
+            break;
           default:
             log.warn('Unknown filter mode: ' + mode + ', falling back to replace');
             instructions.push({
