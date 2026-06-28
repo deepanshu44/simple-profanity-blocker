@@ -276,24 +276,8 @@
 
   <!-- ── 4. Evasion Attempts ───────────────────────────────────── -->
   <section>
-    <h2>4 · Evasion Attempts</h2>
+    <h2>4 · Evasion Attempts — Basic</h2>
 
-    <div class="test-row">
-      <span class="tag tag-evasion">repeat</span>
-      <span class="test-text">That was fuuuuuck horrible.</span>
-    </div>
-    <div class="test-row">
-      <span class="tag tag-evasion">repeat</span>
-      <span class="test-text">Shiiiit, not again.</span>
-    </div>
-    <div class="test-row">
-      <span class="tag tag-evasion">spaced</span>
-      <span class="test-text">He said f.u.c.k under his breath.</span>
-    </div>
-    <div class="test-row">
-      <span class="tag tag-evasion">spaced</span>
-      <span class="test-text">She spelled out s-h-i-t slowly.</span>
-    </div>
     <div class="test-row">
       <span class="tag tag-evasion">leet</span>
       <span class="test-text">That $h!t was terrible (leetspeak: $=s, !=i).</span>
@@ -303,8 +287,62 @@
       <span class="test-text">fµck this (µ → u via Unicode substitution).</span>
     </div>
     <div class="test-row">
+      <span class="tag tag-evasion">leet</span>
+      <span class="test-text">What an @$$hole (leetspeak: @=a, $=s).</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">accent</span>
+      <span class="test-text">That was fück ugly (accented ü → u via NFKD).</span>
+    </div>
+  </section>
+
+  <!-- ── 4b. Length-Changing Evasion (Index Mapping Fix) ────────── -->
+  <section>
+    <h2>4b · Length-Changing Evasion — Full Word Must Be Covered</h2>
+    <p style="color: var(--muted); font-size: 0.8rem; margin-bottom: 12px;">
+      These test the index mapping fix. The ENTIRE obfuscated word should be
+      blurred/replaced — not just the first few characters.
+    </p>
+
+    <div class="test-row">
+      <span class="tag tag-evasion">repeat×5</span>
+      <span class="test-text">That was fuuuuuck horrible. ← all 8 chars should be covered</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">repeat×4</span>
+      <span class="test-text">Shiiiit, not again. ← all 7 chars should be covered</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">repeat×6</span>
+      <span class="test-text">Oh fuuuuuuuck no. ← all 10 chars should be covered</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">repeat×3</span>
+      <span class="test-text">What the heeeell? ← all 7 chars (needs Tier 2)</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">spaced</span>
+      <span class="test-text">He said f.u.c.k under his breath. ← all 7 chars including dots</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">spaced</span>
+      <span class="test-text">She spelled out s-h-i-t slowly. ← all 7 chars including dashes</span>
+    </div>
+    <div class="test-row">
       <span class="tag tag-evasion">zero-width</span>
-      <span class="test-text">fu&#8203;ck (zero-width space U+200B inserted).</span>
+      <span class="test-text">fu&#8203;ck (zero-width space U+200B inserted between u and c).</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">zero-width</span>
+      <span class="test-text">s&#8205;h&#8203;i&#8204;t (multiple zero-width chars scattered inside).</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">combo</span>
+      <span class="test-text">$hiiiit (leetspeak $ + repeated i's — combined evasion).</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">combo</span>
+      <span class="test-text">fuuuµck (repeated u's + Unicode µ — combined evasion).</span>
     </div>
   </section>
 
