@@ -1,5 +1,5 @@
 {
-  "name": "clean-browse",
+  "name": "simple-profanity-blocker",
   "version": "1.0.0",
   "private": true,
   "description": "Firefox extension that filters profanity from web pages in real-time. Privacy-first — all processing stays local.",

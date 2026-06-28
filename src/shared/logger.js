@@ -21,7 +21,7 @@
    * @returns {{ debug: Function, warn: Function, error: Function, critical: Function }}
    */
   function createLogger(moduleName) {
-    var prefix = '[CleanBrowse:' + moduleName + ']';
+    var prefix = '[SimpleProfanityBlocker:' + moduleName + ']';
 
     return {
       /** Debug-level log. Only outputs when IS_DEBUG is true. */

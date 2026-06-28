@@ -1,4 +1,4 @@
-# Clean Browse
+# Simple Profanity Blocker
 
 A Firefox browser extension that filters profanity and foul language from web pages in real-time. Privacy-first — all processing stays local in your browser.
 
