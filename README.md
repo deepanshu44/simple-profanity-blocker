@@ -4,7 +4,7 @@ A Firefox browser extension that filters profanity and foul language from web pa
 
 ## Features
 
-- **Three filter modes**: Blur (hover to reveal), Replace (with ****), or Remove entirely
+- **Four filter modes**: Blur (hover to reveal), Emoji (replace with 🤬), Replace (with ****), or Remove entirely
 - **Tiered filtering**: Severe, Moderate, or Mild — choose your comfort level
 - **Evasion detection**: Catches leetspeak (f\*ck), Unicode tricks (fμck), repeated chars (fuuuck), and spaced-out patterns (f.u.c.k)
 - **False-positive protection**: Built-in whitelist prevents innocent words like "cocktail" and "assassin" from being filtered
@@ -19,14 +19,14 @@ A Firefox browser extension that filters profanity and foul language from web pa
 1. Clone or download this repository
 2. Open Firefox and navigate to `about:debugging#/runtime/this-firefox`
 3. Click **"Load Temporary Add-on..."**
-4. Select the `src/manifest.json` file
+4. Select the `manifest.json` file in the root directory
 5. The extension icon appears in the toolbar — click it to configure
 
 ## Usage
 
-1. Click the Clean Browse shield icon in the toolbar
+1. Click the Simple Profanity Blocker shield icon in the toolbar
 2. Toggle filtering on/off globally or per-site
-3. Choose your filter mode (Blur / Replace / Remove)
+3. Choose your filter mode (Blur / Emoji / Replace / Remove)
 4. Adjust filter strength with the tier slider
 5. Add custom words in the expandable Custom Words section
 
@@ -40,7 +40,7 @@ A Firefox browser extension that filters profanity and foul language from web pa
 ### Setup
 
 ```bash
-cd clean-browse
+cd simple-profanity-blocker
 npm install
 ```
 
@@ -61,9 +61,9 @@ npm install
 ### Project Structure
 
 ```
-clean-browse/
+simple-profanity-blocker/
+├── manifest.json               # Firefox Manifest V2
 ├── src/
-│   ├── manifest.json           # Firefox Manifest V2
 │   ├── shared/                 # Shared modules (all contexts)
 │   │   ├── constants.js        # Enums, defaults, message types
 │   │   ├── logger.js           # Structured logging
