@@ -1,0 +1,29 @@
+{
+  "name": "clean-browse",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Firefox extension that filters profanity from web pages in real-time. Privacy-first — all processing stays local.",
+  "type": "commonjs",
+  "scripts": {
+    "lint": "eslint src/ tests/",
+    "lint:fix": "eslint src/ tests/ --fix",
+    "format": "prettier --write 'src/**/*.{js,json,css,html}'",
+    "format:check": "prettier --check 'src/**/*.{js,json,css,html}'",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "ext:lint": "web-ext lint --source-dir=src",
+    "ext:run": "web-ext run --source-dir=src",
+    "ext:build": "web-ext build --source-dir=src --artifacts-dir=dist",
+    "validate": "npm run lint && npm run format:check && npm run test && npm run ext:lint"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.0",
+    "vitest": "^2.0.0",
+    "@vitest/coverage-v8": "^2.0.0",
+    "web-ext": "^8.2.0",
+    "jsdom": "^24.1.0"
+  },
+  "license": "MIT"
+}

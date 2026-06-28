@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=340">
+  <title>Clean Browse</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup" id="popup-root">
+
+    <!-- ── Header ──────────────────────────────────────────────── -->
+    <header class="header" id="header">
+      <div class="header__brand">
+        <svg class="header__icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <h1 class="header__title">Clean Browse</h1>
+      </div>
+      <label class="toggle" id="global-toggle-label" title="Enable or disable filtering globally">
+        <input type="checkbox" id="global-toggle" class="toggle__input" checked>
+        <span class="toggle__slider"></span>
+      </label>
+    </header>
+
+    <!-- ── Filter Mode ─────────────────────────────────────────── -->
+    <section class="card" id="mode-section">
+      <h2 class="card__label">Filter Mode</h2>
+      <div class="segmented" id="mode-selector" role="radiogroup" aria-label="Filter mode">
+        <button class="segmented__btn active" data-mode="blur" id="mode-blur" role="radio" aria-checked="true">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><circle cx="8" cy="8" r="6" opacity="0.3"/><circle cx="8" cy="8" r="3"/></svg>
+          Blur
+        </button>
+        <button class="segmented__btn" data-mode="replace" id="mode-replace" role="radio" aria-checked="false">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><rect x="2" y="6" width="12" height="4" rx="1"/></svg>
+          Replace
+        </button>
+        <button class="segmented__btn" data-mode="remove" id="mode-remove" role="radio" aria-checked="false">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+          Remove
+        </button>
+      </div>
+    </section>
+
+    <!-- ── Filter Tier ─────────────────────────────────────────── -->
+    <section class="card" id="tier-section">
+      <div class="card__row">
+        <h2 class="card__label">Filter Strength</h2>
+        <span class="tier-badge" id="tier-badge">Moderate</span>
+      </div>
+      <input type="range" id="tier-slider" class="tier-slider" min="1" max="3" value="2" step="1" aria-label="Filter tier">
+      <div class="tier-labels">
+        <span class="tier-labels__item" data-tier="1">Severe</span>
+        <span class="tier-labels__item" data-tier="2">Moderate</span>
+        <span class="tier-labels__item" data-tier="3">Mild</span>
+      </div>
+    </section>
+
+    <!-- ── Stats ───────────────────────────────────────────────── -->
+    <section class="stats" id="stats-section">
+      <div class="stats__item">
+        <span class="stats__value" id="stats-session">0</span>
+        <span class="stats__label">This session</span>
+      </div>
+      <div class="stats__divider"></div>
+      <div class="stats__item">
+        <span class="stats__value" id="stats-total">0</span>
+        <span class="stats__label">All time</span>
+      </div>
+    </section>
+
+    <!-- ── Site Override ───────────────────────────────────────── -->
+    <section class="card" id="site-section">
+      <div class="card__row">
+        <div class="site-info">
+          <h2 class="card__label">This Site</h2>
+          <span class="site-domain" id="site-domain" title="Current site domain">—</span>
+        </div>
+        <label class="toggle toggle--small" id="site-toggle-label" title="Enable or disable on this site">
+          <input type="checkbox" id="site-toggle" class="toggle__input" checked>
+          <span class="toggle__slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- ── Custom Words ────────────────────────────────────────── -->
+    <section class="card" id="custom-words-section">
+      <button class="accordion__trigger" id="custom-words-trigger" aria-expanded="false" aria-controls="custom-words-panel">
+        <h2 class="card__label">Custom Words</h2>
+        <svg class="accordion__chevron" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6l4 4 4-4"/>
+        </svg>
+      </button>
+      <div class="accordion__panel" id="custom-words-panel" aria-hidden="true">
+        <div class="word-input-row">
+          <input type="text" id="custom-word-input" class="word-input" placeholder="Add words (comma-separated)" aria-label="Add custom words">
+          <button class="btn btn--accent" id="add-words-btn" title="Add words">
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v12M2 8h12"/></svg>
+          </button>
+        </div>
+        <div class="word-chips" id="word-chips"></div>
+        <p class="word-hint" id="word-hint">Separate words with commas. Press Enter or click + to add.</p>
+      </div>
+    </section>
+
+    <!-- ── Footer ──────────────────────────────────────────────── -->
+    <footer class="footer" id="footer">
+      <span class="footer__version" id="footer-version">v1.0.0</span>
+      <a class="footer__link" href="https://github.com/user/clean-browse/issues" target="_blank" rel="noopener noreferrer" id="footer-issues">Report Issue</a>
+    </footer>
+
+  </div>
+
+  <!-- Shared modules (order matters: constants → logger → storage) -->
+  <script src="../shared/constants.js"></script>
+  <script src="../shared/logger.js"></script>
+  <script src="../shared/storage.js"></script>
+  <!-- Popup logic -->
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "tier": "mild",
+  "description": "Tier 3: Mild profanity — soft swear words and casual expletives",
+  "words": [
+    { "word": "damn", "variants": ["dammit", "damnit", "damnation"], "category": "religious" },
+    { "word": "damned", "variants": [], "category": "religious" },
+    { "word": "hell", "variants": [], "category": "religious" },
+    { "word": "bloody", "variants": [], "category": "excretory" },
+    { "word": "bollocks", "variants": ["bollox", "bollix"], "category": "sexual" },
+    { "word": "bugger", "variants": [], "category": "sexual" },
+    { "word": "sod", "variants": [], "category": "sexual" },
+    { "word": "piss", "variants": ["pis"], "category": "excretory" },
+    { "word": "pissed", "variants": ["pist"], "category": "excretory" },
+    { "word": "screw", "variants": [], "category": "sexual" },
+    { "word": "screwed", "variants": [], "category": "sexual" },
+    { "word": "suck", "variants": ["sux"], "category": "sexual" },
+    { "word": "sucks", "variants": [], "category": "sexual" },
+    { "word": "lmao", "variants": ["lmfao"], "category": "excretory" },
+    { "word": "wtf", "variants": [], "category": "excretory" },
+    { "word": "stfu", "variants": [], "category": "excretory" },
+    { "word": "idiot", "variants": [], "category": "slur" },
+    { "word": "moron", "variants": [], "category": "slur" },
+    { "word": "stupid", "variants": ["stoopid"], "category": "slur" }
+  ]
+}

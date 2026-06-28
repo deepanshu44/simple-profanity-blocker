@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "tier": "moderate",
+  "description": "Tier 2: Moderate profanity — common swear words",
+  "words": [
+    { "word": "ass", "variants": ["arse", "azz"], "category": "excretory" },
+    { "word": "asses", "variants": ["arses"], "category": "excretory" },
+    { "word": "butthole", "variants": ["buthole"], "category": "excretory" },
+    { "word": "shithead", "variants": ["shythead"], "category": "excretory" },
+    { "word": "dipshit", "variants": ["dipshyt"], "category": "excretory" },
+    { "word": "horseshit", "variants": [], "category": "excretory" },
+    { "word": "jackass", "variants": ["jakass"], "category": "excretory" },
+    { "word": "dumbass", "variants": ["dumass"], "category": "excretory" },
+    { "word": "badass", "variants": [], "category": "excretory" },
+    { "word": "smartass", "variants": [], "category": "excretory" },
+    { "word": "fatass", "variants": [], "category": "excretory" },
+    { "word": "kickass", "variants": [], "category": "excretory" },
+    { "word": "douchebag", "variants": ["douchbag", "douche"], "category": "sexual" },
+    { "word": "skank", "variants": ["scank"], "category": "sexual" },
+    { "word": "hoe", "variants": [], "category": "sexual" },
+    { "word": "hooker", "variants": [], "category": "sexual" },
+    { "word": "pervert", "variants": ["perv"], "category": "sexual" },
+    { "word": "boner", "variants": [], "category": "sexual" },
+    { "word": "erection", "variants": [], "category": "sexual" },
+    { "word": "orgasm", "variants": [], "category": "sexual" },
+    { "word": "blowjob", "variants": ["bj"], "category": "sexual" },
+    { "word": "handjob", "variants": ["hj"], "category": "sexual" },
+    { "word": "circlejerk", "variants": [], "category": "sexual" },
+    { "word": "crap", "variants": ["krap"], "category": "excretory" },
+    { "word": "crappy", "variants": ["krappy"], "category": "excretory" }
+  ]
+}
