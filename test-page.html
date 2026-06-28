@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clean Browse — Test Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #0f0f1a;
+      --card: #181830;
+      --border: rgba(255,255,255,0.06);
+      --text: #e8e8f0;
+      --muted: #9898b0;
+      --accent: #0D9488;
+      --accent-light: #2DD4BF;
+      --pass: #22c55e;
+      --fail: #ef4444;
+      --warn: #f59e0b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0D9488, #06B6D4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .legend {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .legend span {
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    .legend .should-filter { border-color: var(--fail); color: var(--fail); }
+    .legend .should-pass { border-color: var(--pass); color: var(--pass); }
+    .legend .evasion { border-color: var(--warn); color: var(--warn); }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    section:hover { border-color: rgba(13,148,136,0.3); }
+
+    section h2 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-light);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .test-row {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .test-row:last-child { border-bottom: none; }
+
+    .tag {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tag-filter { background: rgba(239,68,68,0.15); color: var(--fail); }
+    .tag-safe { background: rgba(34,197,94,0.15); color: var(--pass); }
+    .tag-evasion { background: rgba(245,158,11,0.15); color: var(--warn); }
+
+    .test-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .comment-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 10px;
+    }
+
+    .comment-box .user {
+      font-size: 0.7rem;
+      color: var(--accent-light);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .dynamic-section { margin-top: 12px; }
+
+    #dynamic-container {
+      min-height: 40px;
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 8px;
+    }
+
+    button {
+      padding: 8px 18px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #0D9488, #06B6D4);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    button:hover {
+      box-shadow: 0 4px 16px rgba(13,148,136,0.4);
+      transform: translateY(-1px);
+    }
+
+    .counter {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🛡️ Clean Browse — Test Page</h1>
+    <p>Load the extension, then check if each row is filtered correctly.</p>
+    <div class="legend">
+      <span class="should-filter">🔴 Should be filtered</span>
+      <span class="should-pass">🟢 Should NOT be filtered</span>
+      <span class="evasion">🟡 Evasion attempt</span>
+    </div>
+  </header>
+
+  <!-- ── 1. Plain Profanity (Tier 1 — Severe) ──────────────────── -->
+  <section>
+    <h2>1 · Plain Profanity (Tier 1 — Severe)</h2>
+
+    <div class="test-row">
+      <span class="tag tag-filter">filter</span>
+      <span class="test-text">What the fuck is going on here?</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-filter">filter</span>
+      <span class="test-text">This is complete bullshit and you know it.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-filter">filter</span>
+      <span class="test-text">Holy shit, I can't believe that happened.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-filter">filter</span>
+      <span class="test-text">She told him to fuck off immediately.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-filter">filter</span>
+      <span class="test-text">That asshole cut me off in traffic.</span>
+    </div>
+  </section>
+
+  <!-- ── 2. Moderate Profanity (Tier 2) ────────────────────────── -->
+  <section>
+    <h2>2 · Moderate Profanity (Tier 2 — set slider to Moderate or Mild)</h2>
+
+    <div class="test-row">
+      <span class="tag tag-filter">filter</span>
+      <span class="test-text">What the hell was that about?</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-filter">filter</span>
+      <span class="test-text">Oh my God, that was such a damn mess.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-filter">filter</span>
+      <span class="test-text">You're such a jackass sometimes.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-filter">filter</span>
+      <span class="test-text">That was a piss-poor performance.</span>
+    </div>
+  </section>
+
+  <!-- ── 3. False Positives (Whitelist) ────────────────────────── -->
+  <section>
+    <h2>3 · False Positives — These Must NOT Be Filtered</h2>
+
+    <div class="test-row">
+      <span class="tag tag-safe">safe</span>
+      <span class="test-text">The assassin crept through the embassy corridors.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-safe">safe</span>
+      <span class="test-text">She ordered a cocktail at the classic bar in Massachusetts.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-safe">safe</span>
+      <span class="test-text">The therapist recommended a therapeutic massage.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-safe">safe</span>
+      <span class="test-text">The cockpit instruments showed the compass heading.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-safe">safe</span>
+      <span class="test-text">A cockroach was found near the bass guitar in the grass.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-safe">safe</span>
+      <span class="test-text">The Scunthorpe problem affects many web filtering systems.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-safe">safe</span>
+      <span class="test-text">The passenger bypassed the overpass to reach the passport office.</span>
+    </div>
+  </section>
+
+  <!-- ── 4. Evasion Attempts ───────────────────────────────────── -->
+  <section>
+    <h2>4 · Evasion Attempts</h2>
+
+    <div class="test-row">
+      <span class="tag tag-evasion">repeat</span>
+      <span class="test-text">That was fuuuuuck horrible.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">repeat</span>
+      <span class="test-text">Shiiiit, not again.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">spaced</span>
+      <span class="test-text">He said f.u.c.k under his breath.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">spaced</span>
+      <span class="test-text">She spelled out s-h-i-t slowly.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">leet</span>
+      <span class="test-text">That $h!t was terrible (leetspeak: $=s, !=i).</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">unicode</span>
+      <span class="test-text">fµck this (µ → u via Unicode substitution).</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-evasion">zero-width</span>
+      <span class="test-text">fu&#8203;ck (zero-width space U+200B inserted).</span>
+    </div>
+  </section>
+
+  <!-- ── 5. Mixed Content ──────────────────────────────────────── -->
+  <section>
+    <h2>5 · Mixed Content — Profanity Near Safe Words</h2>
+
+    <div class="test-row">
+      <span class="tag tag-filter">mixed</span>
+      <span class="test-text">The assassin said "what the fuck" and ran to the embassy.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-filter">mixed</span>
+      <span class="test-text">That cocktail tasted like shit, honestly.</span>
+    </div>
+    <div class="test-row">
+      <span class="tag tag-filter">mixed</span>
+      <span class="test-text">The therapist was damn good at her job.</span>
+    </div>
+  </section>
+
+  <!-- ── 6. Forum-Style Comments ───────────────────────────────── -->
+  <section>
+    <h2>6 · Simulated Forum Comments</h2>
+
+    <div class="comment-box">
+      <div class="user">@angry_user_42</div>
+      <div class="test-text">This update is absolute horseshit. The devs don't give a damn about the community anymore. Fuck this game.</div>
+    </div>
+    <div class="comment-box">
+      <div class="user">@chill_person</div>
+      <div class="test-text">I think the update is actually pretty good. The new compass feature and the classic mode are well done.</div>
+    </div>
+    <div class="comment-box">
+      <div class="user">@troll_master</div>
+      <div class="test-text">lmao what a bunch of bullshit, this whole thread is ass. go touch grass losers 😂</div>
+    </div>
+  </section>
+
+  <!-- ── 7. Excluded Tags ──────────────────────────────────────── -->
+  <section>
+    <h2>7 · Excluded Tags — Code Should NOT Be Filtered</h2>
+
+    <div class="test-row">
+      <span class="tag tag-safe">code</span>
+      <span class="test-text">This code block should stay untouched:</span>
+    </div>
+    <pre style="background: var(--bg); padding: 12px; border-radius: 6px; font-size: 0.85rem; color: #a0a0c0; margin-top: 8px;">
+// This variable name contains "ass" — it must NOT be filtered
+const assert = require('assert');
+function processData(shittyInput) {
+  return shittyInput.trim();
+}</pre>
+
+    <div class="test-row" style="margin-top: 12px;">
+      <span class="tag tag-safe">textarea</span>
+      <span class="test-text">This textarea should stay untouched:</span>
+    </div>
+    <textarea style="width: 100%; height: 60px; background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 10px; font-family: monospace; font-size: 0.85rem; resize: none; margin-top: 8px;">Fuck this textarea — it should NOT be filtered by the extension.</textarea>
+  </section>
+
+  <!-- ── 8. Dynamic Content (SPA Test) ─────────────────────────── -->
+  <section>
+    <h2>8 · Dynamic Content — MutationObserver Test</h2>
+    <p style="color: var(--muted); font-size: 0.82rem; margin-bottom: 8px;">
+      Click the button to inject content. The extension should detect and filter it in real-time.
+    </p>
+
+    <button onclick="injectComment()">💬 Inject New Comment</button>
+    <span class="counter" id="inject-counter">0 comments injected</span>
+
+    <div id="dynamic-container"></div>
+  </section>
+
+  <!-- ── 9. Long Paragraph ─────────────────────────────────────── -->
+  <section>
+    <h2>9 · Long Paragraph — Performance Stress</h2>
+    <p class="test-text">
+      In a heated online debate about politics, one user wrote: "This whole fucking system is broken. 
+      The politicians don't give a shit about regular people. It's all bullshit rhetoric designed to 
+      distract us from the real damn problems. Every election cycle, the same crap happens — promises 
+      made, promises broken. The taxpayers get screwed while the elite cocktail party crowd in 
+      Massachusetts sips champagne at the embassy. Meanwhile, the therapist down the street can't even 
+      afford healthcare. The assassin of our democracy isn't a person — it's the classic corruption 
+      that has become so pervasive nobody gives a damn anymore. What the hell happened to accountability? 
+      This country used to stand for something, and now it's all going to shit."
+    </p>
+  </section>
+
+  <footer>
+    <p>Clean Browse Extension Test Page · Open the extension popup to change filter mode and tier</p>
+  </footer>
+
+  <script>
+    let injectCount = 0;
+
+    const sampleComments = [
+      { user: '@live_troll', text: 'Holy shit, this extension actually works! What the fuck 😮' },
+      { user: '@nice_person', text: 'The classic cocktail recipe from the embassy party was delicious.' },
+      { user: '@rager99', text: 'This is such bullshit. Absolute horsecrap. Damn developers.' },
+      { user: '@bot_3000', text: 'fµck this, $h!t product, a$$holes everywhere (evasion test)' },
+      { user: '@chill_vibes', text: 'The therapist said the massage therapy is helping my bass guitar posture.' },
+      { user: '@keyboard_warrior', text: 'fuuuuck you all, this thread is f.u.c.k.i.n.g garbage' },
+    ];
+
+    function injectComment() {
+      const container = document.getElementById('dynamic-container');
+      const sample = sampleComments[injectCount % sampleComments.length];
+
+      const box = document.createElement('div');
+      box.className = 'comment-box';
+      box.innerHTML = `<div class="user">${sample.user}</div><div class="test-text">${sample.text}</div>`;
+
+      container.appendChild(box);
+      injectCount++;
+      document.getElementById('inject-counter').textContent = injectCount + ' comments injected';
+    }
+  </script>
+
+</body>
+</html>
