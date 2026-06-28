@@ -47,8 +47,8 @@
 
 .cb-emoji {
   display: block !important;
-  height: 1.15em !important;
-  width: 1.15em !important;
+  height: 1.0em !important;
+  width: 1.0em !important;
   object-fit: contain !important;
   pointer-events: none !important;
 }
