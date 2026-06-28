@@ -4,6 +4,9 @@
  * Core filtering logic. Combines normalizer + matcher to process text nodes.
  * Returns filter instructions — does NOT modify the DOM directly.
  *
+ * Uses normalizeWithOffsets() to get precise index mapping between
+ * normalized and original text, even when normalization changes string length.
+ *
  * Depends on: CleanBrowse.Normalizer, CleanBrowse.Matcher, CleanBrowse.Logger
  */
 (function () {
@@ -30,27 +33,52 @@
   }
 
   /**
-   * Map match indices from normalized text back to original text.
+   * Map match indices from normalized text back to original text
+   * using the offset map produced by normalizeWithOffsets().
    *
-   * When normalization preserves string length (1-to-1 char mapping like
-   * lowercase, leet substitution), indices map directly. When it changes
-   * length (collapsing repeats, stripping chars), we clamp to bounds.
+   * offsets[i] = the index in the ORIGINAL string that produced
+   * normalized character i.
    *
-   * @param {Array} matches
+   * For a match at normalized [start, start+len), we look up:
+   *   origStart = offsets[start]
+   *   origEnd   = offsets[start+len-1] + 1
+   *
+   * Then extend origEnd to capture the full original word boundary
+   * (e.g. "fuuuuuck" when normalized match is just "fuck").
+   *
+   * @param {Array} matches - From Matcher.findMatches
    * @param {string} originalText
-   * @param {string} normalizedText
-   * @returns {Array}
+   * @param {number[]} offsets - From normalizeWithOffsets
+   * @returns {Array} Matches with corrected original indices
    */
-  function mapMatchesToOriginal(matches, originalText, normalizedText) {
-    if (normalizedText.length === originalText.length) {
-      return matches;
-    }
-
+  function mapMatchesToOriginal(matches, originalText, offsets) {
     return matches.map(function (m) {
-      var start = Math.min(m.index, originalText.length);
-      var length = Math.min(m.length, originalText.length - start);
-      return { word: m.word, index: start, length: length };
-    });
+      var normStart = m.index;
+      var normEnd = m.index + m.length - 1;
+
+      // Clamp to offset bounds
+      if (normStart >= offsets.length) return null;
+      if (normEnd >= offsets.length) normEnd = offsets.length - 1;
+
+      var origStart = offsets[normStart];
+      var origEnd = offsets[normEnd] + 1;
+
+      // Extend to cover the full original word at word boundaries.
+      // Walk backward from origStart to find actual word start.
+      while (origStart > 0 && /\w/.test(originalText[origStart - 1])) {
+        origStart--;
+      }
+      // Walk forward from origEnd to find actual word end.
+      while (origEnd < originalText.length && /\w/.test(originalText[origEnd])) {
+        origEnd++;
+      }
+
+      return {
+        word: m.word,
+        index: origStart,
+        length: origEnd - origStart,
+      };
+    }).filter(function (m) { return m !== null; });
   }
 
   /**
@@ -80,14 +108,17 @@
         return { hasMatches: false, instructions: [], matchCount: 0 };
       }
 
-      var normalizedText = Normalizer.normalize(originalText);
+      var result = Normalizer.normalizeWithOffsets(originalText);
+      var normalizedText = result.text;
+      var offsets = result.offsets;
+
       var matches = Matcher.findMatches(matcher, originalText, normalizedText);
 
       if (!matches || matches.length === 0) {
         return { hasMatches: false, instructions: [], matchCount: 0 };
       }
 
-      var mapped = mapMatchesToOriginal(matches, originalText, normalizedText);
+      var mapped = mapMatchesToOriginal(matches, originalText, offsets);
       var instructions = [];
 
       for (var i = 0; i < mapped.length; i++) {
