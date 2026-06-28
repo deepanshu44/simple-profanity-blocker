@@ -6,8 +6,8 @@ A Firefox browser extension that filters profanity and foul language from web pa
 
 - **Four filter modes**: Blur (hover to reveal), Emoji (replace with 🤬), Replace (with ****), or Remove entirely
 - **Tiered filtering**: Severe, Moderate, or Mild — choose your comfort level
-- **Evasion detection**: Catches leetspeak (f\*ck), Unicode tricks (fμck), repeated chars (fuuuck), and spaced-out patterns (f.u.c.k)
-- **False-positive protection**: Built-in whitelist prevents innocent words like "cocktail" and "assassin" from being filtered
+- **Evasion detection**: Catches leetspeak (a\*ck), Unicode tricks (aμck), repeated chars (auuuck), and spaced-out patterns (a.u.c.k)
+- **False-positive protection**: Built-in whitelist prevents innocent words from being filtered
 - **Per-site overrides**: Enable/disable filtering on specific websites
 - **Custom words**: Add your own words to filter or remove defaults
 - **SPA support**: MutationObserver catches dynamically loaded content (infinite scroll, AJAX, React/Vue apps)
