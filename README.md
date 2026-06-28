@@ -19,7 +19,7 @@ A Firefox browser extension that filters profanity and foul language from web pa
 1. Clone or download this repository
 2. Open Firefox and navigate to `about:debugging#/runtime/this-firefox`
 3. Click **"Load Temporary Add-on..."**
-4. Select the `manifest.json` file in the root directory
+4. Select the `src/manifest.json` file
 5. The extension icon appears in the toolbar — click it to configure
 
 ## Usage
@@ -62,8 +62,8 @@ npm install
 
 ```
 simple-profanity-blocker/
-├── manifest.json               # Firefox Manifest V2
 ├── src/
+│   ├── manifest.json           # Firefox Manifest V2
 │   ├── shared/                 # Shared modules (all contexts)
 │   │   ├── constants.js        # Enums, defaults, message types
 │   │   ├── logger.js           # Structured logging
