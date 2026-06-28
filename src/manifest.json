@@ -4,6 +4,16 @@
   "version": "1.0.0",
   "description": "Filters profanity and foul language from web pages in real-time. Privacy-first — all processing stays local.",
   "author": "Simple Profanity Blocker Contributors",
+  
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "simple-profanity-blocker@example.com",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
 
   "permissions": [
     "storage",
