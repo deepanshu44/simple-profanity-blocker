@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Simple Profanity Blocker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Filters profanity and foul language from web pages in real-time. Privacy-first — all processing stays local.",
   "author": "Simple Profanity Blocker Contributors",
   
@@ -12,6 +12,9 @@
       "data_collection_permissions": {
         "required": ["none"]
       }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
     }
   },
 
