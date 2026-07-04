@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Simple Profanity Blocker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Filters profanity and foul language from web pages in real-time. Privacy-first — all processing stays local.",
   "author": "Simple Profanity Blocker Contributors",
   
@@ -54,10 +54,18 @@
 
   "browser_action": {
     "default_popup": "popup/popup.html",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    },
     "default_title": "Simple Profanity Blocker"
   },
 
 
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
 
   "web_accessible_resources": [
     "data/wordlist-severe.json",
