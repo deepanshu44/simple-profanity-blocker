@@ -2,6 +2,9 @@
 
 A Firefox browser extension that filters profanity and foul language from web pages in real-time. Privacy-first — all processing stays local in your browser.
 
+## Download it here (also works on mobile)
+[https://addons.mozilla.org/en-US/firefox/addon/simple-profanity-blocker/](https://addons.mozilla.org/en-US/firefox/addon/simple-profanity-blocker/ "Download addon")
+
 ## Features
 
 - **Four filter modes**: Blur (hover to reveal), Emoji (replace with 🤬), Replace (with ****), or Remove entirely
